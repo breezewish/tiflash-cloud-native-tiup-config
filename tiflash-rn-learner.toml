@@ -1,0 +1,23 @@
+log-file = "/tmp/tiflash/rn/log/tiflash_tikv.log"
+
+[rocksdb]
+wal-dir = ""
+max-open-files = 256
+
+[security]
+ca-path = ""
+cert-path = ""
+key-path = ""
+
+[server]
+addr = "0.0.0.0:20171"
+advertise-addr = "127.0.0.1:20171"
+engine-addr = "127.0.0.1:3931"
+status-addr = "0.0.0.0:20293"
+advertise-status-addr = "127.0.0.1:20293"
+
+[storage]
+data-dir = "/tmp/tiflash/rn/flash"
+
+[raftdb]
+max-open-files = 256

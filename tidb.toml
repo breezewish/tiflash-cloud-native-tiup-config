@@ -1,0 +1,2 @@
+use-autoscaler = false
+disaggregated-tiflash = true

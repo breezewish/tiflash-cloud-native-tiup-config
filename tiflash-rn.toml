@@ -1,0 +1,84 @@
+default_profile = "default"
+display_name = "TiFlash"
+http_port = 8124
+listen_host = "0.0.0.0"
+mark_cache_size = 5368709120
+tcp_port = 9201
+tmp_path = "/tmp/tiflash/rn/tmp"
+
+[storage.main]
+dir = ["/tmp/tiflash/rn/data"]
+
+[storage.remote]
+dir = "/tmp/tiflash/remote"
+
+[storage.remote.cache]
+dir = "/tmp/tiflash/remote_cache"
+capacity = 10000000000
+
+[storage.s3]
+endpoint = "127.0.0.1:9222"
+bucket = "tiflash-s3"
+root = "/"
+access_key_id = "minioadmin"
+secret_access_key = "minioadmin"
+
+[flash]
+service_addr = "127.0.0.1:3931"
+tidb_status_addr = "127.0.0.1:10080"
+disaggregated_mode = "tiflash_compute"
+use_autoscaler = false
+
+[flash.flash_cluster]
+log = "/tmp/tiflash/rn/log/tiflash_cluster_manager.log"
+master_ttl = 60
+refresh_interval = 20
+update_rule_interval = 5
+[flash.proxy]
+config = "/tmp/tiflash-config/tiflash-rn-learner.toml"
+
+[logger]
+count = 20
+errorlog = "/tmp/tiflash/rn/log/tiflash_error.log"
+level = "debug"
+log = "/tmp/tiflash/rn/log/tiflash.log"
+size = "1000M"
+
+[profiles]
+[profiles.default]
+load_balancing = "random"
+max_memory_usage = 0
+use_uncompressed_cache = 0
+
+[profiles.readonly]
+readonly = 1
+
+[quotas]
+[quotas.default]
+[quotas.default.interval]
+duration = 3600
+errors = 0
+execution_time = 0
+queries = 0
+read_rows = 0
+result_rows = 0
+
+[raft]
+pd_addr = "127.0.0.1:2379"
+
+[status]
+metrics_port = 8235
+
+[users]
+[users.default]
+password = ""
+profile = "default"
+quota = "default"
+[users.default.networks]
+ip = "::/0"
+[users.readonly]
+password = ""
+profile = "readonly"
+quota = "default"
+[users.readonly.networks]
+ip = "::/0"
